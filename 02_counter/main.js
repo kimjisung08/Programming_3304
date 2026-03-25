@@ -18,7 +18,12 @@ const resultH1 = document.getElementById("result");
 //     resultH1.innerHTML = number;
 // }
 
-const plus = () => {
-    number++;
+const plus1 = (value = 1) => {
+    number += value;
+    resultH1.innerHTML = number;
+}
+
+const reset = () => {
+    number = 0;
     resultH1.innerHTML = number;
 }
