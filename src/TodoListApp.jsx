@@ -1,4 +1,7 @@
 import './todolist.css'
+import TodoItemEmpty from './components/TodoItemEmpty.jsx'
+import Button from './components/Button.jsx'
+import Checkbox from './components/Checkbox.jsx'
 
 function TodoListApp() {
     return (
@@ -7,19 +10,15 @@ function TodoListApp() {
 
             <form className="todo_form">
                 <input type="text" placeholder="할 일을 입력하세요!" className="todo_input" />
-                <button type="submit" className="todo_button todo_button--add">Add</button>
+                <Button type="submit" className="todo_button todo_button--add">Add</Button>
             </form>
 
             <ul className="todo_list">
-                <li className="todo__item todo__item--empty">
-                    <p>할 일 없음.</p>
-                </li>
-
+                <TodoItemEmpty/>
                 <li className="todo_item todo_item--complete">
-                    <input type="checkbox" id="chk-1" className="todo_check" />
-                    <label htmlFor="chk-1" className="todo_label">think</label>
-                    <button className="todo_button todo_button--edit">📝</button>
-                    <button className="todo_button todo_button--delete">❌</button>
+                    <Checkbox id="1"/>
+                    <Button className="todo_button todo_button--edit">📝</Button>
+                    <Button className="todo_button todo_button--delete">❌</Button>
                 </li>
             </ul>
         </div>
