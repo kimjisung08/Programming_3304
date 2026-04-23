@@ -5,5 +5,4 @@ function TodoItemEmpty() {
         </li>
     )
 }
-
 export default TodoItemEmpty;

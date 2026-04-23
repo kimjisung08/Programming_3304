@@ -1,12 +1,12 @@
-# Programming 수업 소스코드 🔥
+# Programming 수업 소스코드 😁
 ## 02_counter
 vanilla HTML, JavaScript
-## React 시작 😁
+## React 시작 🤧
 ```shell
 npm create vite@latest .
 ```
-### counterApp ☝️
--`useState()`
--`onClick = {() => set함수()}`
--`onClick = {() => set함수((이전state) => 이전state + 1)}`
-### TodoListApp 😁
+### CounterApp 🤐🤐
+- `useState()`
+- `onClick={() => set함수()}`
+- `onClick={() => set함수((이전state) => 이전state + 1)}`
+### TodoListApp 😆

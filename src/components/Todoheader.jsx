@@ -1,5 +1,5 @@
-export default function Todoheader() {
+export default function TodoHeader() {
     return (
-        <h1 className="todo_title">No Think, Do It!!</h1>
+        <h1 className="todo__title">No Think, Do It.</h1>
     )
 }

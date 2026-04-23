@@ -3,34 +3,42 @@ import './todolist.css'
 // import TodoItemEmpty from './components/TodoItemEmpty.jsx'
 // import Button from './components/Button.jsx'
 // import Checkbox from './components/Checkbox.jsx'
-import TodoHeader from './components/Todoheader.jsx'
-import TodoAdder from './components/Todoadder.jsx'
+import TodoHeader from './components/TodoHeader.jsx'
+import TodoAdder from './components/TodoAdder.jsx'
 // import TodoItem from './components/TodoItem.jsx'
 import TodoList from './components/TodoList.jsx'
 
 class Todo {
     constructor(text) {
-        this.text = text;                 //할일의 내용
-        this.id = Date.now();             //할일 id고유의 값 == new Date().getItem()
-        this.isCompleted = false;         //할일 완료 여부
+        this.id = Date.now();   //할일 id: 고유의 값 == new Date().getTime()
+        this.text = text;       //할일의 내용
+        this.isCompleted = false; //할일 완료 여부
     }
 }
 
 function TodoListApp() {
     const [todos, setTodos] = useState([]);
     const addTodo = (text) => setTodos((todos) => [
-        //기존 todos 복사
+        //이전 todos 복사
         ...todos,
-        //newtodo 만들어서
-        //뒤에 추가하자 
+        //newTodo 만들어서
+        //뒤에 추가하자
         new Todo(text)
     ]);
+    const toggleTodo = (id) => {
+        setTodos((todos) =>
+            //todos에서 하나씩 꺼내어 todo. todo의 id 와 id가 같다면, 기존 todo.isCompleted 값 수정. 아니면 그대로
+            todos.map((todo) =>
+                todo.id === id ? { ...todo, isCompleted: !todo.isCompleted} : todo
+            )
+        )
+    }
 
     return (
         <div className="todo">
-            <TodoHeader/>
-            <TodoAdder addTodo = {addTodo}/>
-            <TodoList todos={todos}/>           
+            <TodoHeader />
+            <TodoAdder addTodo={addTodo} />
+            <TodoList todos={todos} toggleTodo={toggleTodo} />
         </div>
     )
 }
