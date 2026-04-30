@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './todolist.css'
 // import TodoItemEmpty from './components/TodoItemEmpty.jsx'
 // import Button from './components/Button.jsx'
@@ -16,8 +16,22 @@ class Todo {
     }
 }
 
+const TODOS_STORAGE_KEY = 'todos';
+
 function TodoListApp() {
-    const [todos, setTodos] = useState([]);
+    //LocalStorage에 저장된 할 일 목록 불러오자
+    //LocalStorage에 저장된게 있으면, todos 대입, 없으면 []
+    const initTodos = () => {
+        const savedTodos = localStorage.getItem(TODOS_STORAGE_KEY);
+        return savedTodos ? JSON.parse(savedTodos) : [];                 //string -> JSON
+    }
+
+    const [todos, setTodos] = useState(initTodos);  //initTodos 함수는 react 처음 한번 호출
+    //LocalStorage에 할 일 목록 저장하자
+    useEffect(() => {
+        localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos)); //JSON -> string
+    }, [todos]);
+
     const addTodo = (text) => setTodos((todos) => [
         //이전 todos 복사
         ...todos,
@@ -29,7 +43,7 @@ function TodoListApp() {
         setTodos((todos) =>
             //todos에서 하나씩 꺼내어 todo. todo의 id 와 id가 같다면, 기존 todo.isCompleted 값 수정. 아니면 그대로
             todos.map((todo) =>
-                todo.id === id ? { ...todo, isCompleted: !todo.isCompleted} : todo
+                todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
             )
         )
     }
@@ -41,11 +55,11 @@ function TodoListApp() {
         )
     }
 
-     const editTodo = (id, newText) => {
+    const editTodo = (id, newText) => {
         //todos 하나씩 꺼내어 todo. id가 같으면, 복사하고, text 속성값 newText로 수정하자
         setTodos((todos) =>
             todos.map((todo) =>
-                todo.id === id ? {...todo, text: newText} : todo
+                todo.id === id ? { ...todo, text: newText } : todo
             )
         )
     }
